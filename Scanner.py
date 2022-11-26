@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
+import sys
 class Scanner:
     def __init__(self, path):
         self.original = cv2.imread(path)
         self.scan()
         self.display()
-
+        #self.save(path)
     def biggets_countour(self,countours):
         bigget = np.array([])
         max_area = 0
@@ -47,9 +48,5 @@ class Scanner:
         converted_paints = np.float32([[0,0],[mwidth,0],[0,mheight],[mwidth,mheight]])
         matrix = cv2.getPerspectiveTransform(input_arr,converted_paints)
         self.output = cv2.warpPerspective(self.original,matrix,(mwidth,mheight))
-        
-
-
-if __name__ == '__main__':
-    s = Scanner("2.jpg")
-    
+    def save(self,filename):
+        cv2.imwrite("output/test.png",self.output)
