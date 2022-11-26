@@ -1,15 +1,18 @@
 import cv2
 import numpy as np
+import os
 import sys
+OUPUT_FOLDER = 'static/outputs'
 class Scanner:
-    def __init__(self, path):
+    def __init__(self, path,filename):
         self.original = cv2.imread(path)
         self.scan()
-        self.display()
-        #self.save(path)
+        #self.display()
+        self.save(filename)
     def biggets_countour(self,countours):
         bigget = np.array([])
         max_area = 0
+        
         for cnt in countours:
             area = cv2.contourArea(cnt)
             if area > 1000:
@@ -49,4 +52,4 @@ class Scanner:
         matrix = cv2.getPerspectiveTransform(input_arr,converted_paints)
         self.output = cv2.warpPerspective(self.original,matrix,(mwidth,mheight))
     def save(self,filename):
-        cv2.imwrite("output/test.png",self.output)
+        cv2.imwrite(os.path.join(OUPUT_FOLDER,filename),self.output)
