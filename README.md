@@ -1,4 +1,4 @@
-#Document Scanner
+# Document Scanner
 
 This is a simple document scanner based on image manipulation using OpenCV and hosting using Flask framework.
 
